@@ -7,6 +7,8 @@ namespace BangazonTaskTracker.DAL
 {
     public class UserTaskRepository
     {
+        UserTaskContext Context = new UserTaskContext();
+        UserTaskRepository Repo = new UserTaskRepository();
 
     }
 }
