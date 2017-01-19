@@ -186,6 +186,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701190110581_seeding.cs" />
+    <Compile Include="Migrations\201701190110581_seeding.Designer.cs">
+      <DependentUpon>201701190110581_seeding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701190127343_Seed2.cs" />
+    <Compile Include="Migrations\201701190127343_Seed2.Designer.cs">
+      <DependentUpon>201701190127343_Seed2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -260,6 +269,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701190110581_seeding.resx">
+      <DependentUpon>201701190110581_seeding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701190127343_Seed2.resx">
+      <DependentUpon>201701190127343_Seed2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
