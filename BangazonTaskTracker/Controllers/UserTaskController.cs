@@ -1,6 +1,4 @@
-﻿using BangazonTaskTracker.DAL;
-using BangazonTaskTracker.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,8 +9,6 @@ namespace BangazonTaskTracker.Controllers
 {
     public class UserTaskController : ApiController
     {
-        UserTaskRepository Repo = new UserTaskRepository();
-
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
@@ -20,16 +16,14 @@ namespace BangazonTaskTracker.Controllers
         }
 
         // GET api/<controller>/5
-        public UserTask Get(int id)
+        public string Get(int id)
         {
-            return Repo.GetUserTaskById(id);
+            return "value";
         }
 
         // POST api/<controller>
-        public void Post([FromBody]UserTask _userTask)
+        public void Post([FromBody]string value)
         {
-            Repo.AddUserTask(_userTask);
-            //this is not completed left here only for build purposes
         }
 
         // PUT api/<controller>/5
@@ -40,7 +34,6 @@ namespace BangazonTaskTracker.Controllers
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
-
         }
     }
 }
