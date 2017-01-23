@@ -55,9 +55,9 @@ namespace BangazonTaskTracker.DAL
 
         }
         //update/Edit
-        public void UpdateUserTaskById(int id, UserTask userTask)
+        public void UpdateUserTaskById(int id, UserTask value)
         {
-            Context.Entry(userTask).State = System.Data.Entity.EntityState.Modified;
+            Context.Entry(value).State = System.Data.Entity.EntityState.Modified;
             Context.SaveChanges();
         }
 
