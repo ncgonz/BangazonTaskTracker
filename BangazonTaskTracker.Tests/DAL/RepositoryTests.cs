@@ -63,14 +63,14 @@ namespace BangazonTaskTracker.Tests.DAL
 
         }
         [TestMethod]
-        public void EnsureCanAddUserTask()
+        public void EnsureCanAddUserTaskById()
         {
-            repo.AddUserTask(_userTask);
+            repo.AddUserTaskById(userTaskId);
             //Act
-            var _count = repo.UserTasks.Count();
-            var expectedCount = 1;
+            var _count = repo.ListOfTasks.Count();
+            var expectedCount = 3;
             //Assert
-            Assert.Equals(_count, 1);
+            Assert.Equals(_count, 3);
         }
         [TestMethod]
         public void EnsureICanCreateInstanceOfUserTask()
