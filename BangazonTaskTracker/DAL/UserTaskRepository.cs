@@ -28,7 +28,7 @@ namespace BangazonTaskTracker.DAL
             Context.UserTasks.Add(_userTask);
             Context.SaveChanges();
         }
-        //ADD USERSTASK TO DB BY ID
+        //ADD USERTASK TO DB BY ID
         public void AddUserTaskById(UserTask userTaskId)
         {
             Context.UserTasks.Add(userTaskId);
@@ -55,10 +55,9 @@ namespace BangazonTaskTracker.DAL
 
         }
         //update/Edit
-        public UserTask UpdateUserTaskById(int id, UserTask userTask)
+        public void UpdateUserTaskById(int id, UserTask userTask)
         {
-            Repo.ListOfTasks.Update(id, userTask);
-            return userTask;
+            Context.Entry(userTask).State = System.Data.Entity.EntityState.Modified;
             Context.SaveChanges();
         }
 

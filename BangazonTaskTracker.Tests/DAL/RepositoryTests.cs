@@ -15,7 +15,7 @@ namespace BangazonTaskTracker.Tests.DAL
     public class RepositoryTests
     {
         private Mock<DbSet<UserTask>> mock_tasks { get; set; }
-        private Mock<UserTaskContext> mock_context {get; set;}
+        private Mock<UserTaskContext> mock_context { get; set; }
         private UserTaskRepository repo { get; set; }
         private List<UserTask> _listTasks { get; set; }
 
@@ -49,8 +49,8 @@ namespace BangazonTaskTracker.Tests.DAL
             };
 
             public void ConnectToDatastore()
-            {
-                var query_tasks = _listTasks.AsQueryable();
+        {
+            var query_tasks = _listTasks.AsQueryable();
 
             mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Provider);
             mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Expression);
@@ -62,26 +62,23 @@ namespace BangazonTaskTracker.Tests.DAL
 
 
         }
-    }            
-     }
-
-        [TestMethod]
-        public void EnsureCanCreateAnInstanceOfTask()
-        {
-            //Arrange //Act
-            UserTask task = new UserTask();
-            //Assert
-            Assert.IsNotNull(task);
-        }
         [TestMethod]
         public void EnsureCanAddUserTask()
         {
-        MockRepository.AddUserTask(_userTask);
+            repo.AddUserTask(_userTask);
             //Act
             var _count = repo.UserTasks.Count();
             var expectedCount = 1;
             //Assert
             Assert.Equals(_count, 1);
+        }
+        [TestMethod]
+        public void EnsureICanCreateInstanceOfUserTask()
+        {
+            //Arrange Act
+            UserTask _task = new UserTask();
+            //Assert
+            Assert.IsNotNull(_task);
         }
     }
 }
