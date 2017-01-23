@@ -62,15 +62,11 @@ namespace BangazonTaskTracker.Tests.DAL
 
 
         }
-
-
-
-    }
-            
+    }            
      }
 
         [TestMethod]
-        public void CanCreateAnInstanceOfUserTask()
+        public void EnsureCanCreateAnInstanceOfTask()
         {
             //Arrange //Act
             UserTask task = new UserTask();
@@ -80,8 +76,7 @@ namespace BangazonTaskTracker.Tests.DAL
         [TestMethod]
         public void EnsureCanAddUserTask()
         {
-            //Arrange
-            repo.AddUserTask(_userTask);
+        MockRepository.AddUserTask(_userTask);
             //Act
             var _count = repo.UserTasks.Count();
             var expectedCount = 1;

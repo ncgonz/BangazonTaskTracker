@@ -9,6 +9,7 @@ namespace BangazonTaskTracker.DAL
 {
     public class UserTaskRepository
     {
+        UserTaskRepository Repo = new UserTaskRepository();
         UserTaskContext Context { get; set; }
 
         public List<UserTask> ListOfTasks { get; private set; }
@@ -27,10 +28,11 @@ namespace BangazonTaskTracker.DAL
             Context.UserTasks.Add(_userTask);
             Context.SaveChanges();
         }
-        public void AddUserTaskById(int id)
+        //ADD USERSTASK TO DB BY ID
+        public void AddUserTaskById(UserTask userTaskId)
         {
-            Context.UserTasks.Add(id);
-            Context.SaveChanges();    
+            Context.UserTasks.Add(userTaskId);
+            Context.SaveChanges();     
         }
        //REMOVE USERTASK FROM DB
         public void RemoveUserTask(UserTask _userTask)
@@ -38,6 +40,7 @@ namespace BangazonTaskTracker.DAL
             Context.UserTasks.Remove(_userTask);
             Context.SaveChanges();
         }
+        //GET USERTASK BY USERTASKID
         public UserTask GetUserTaskById(int userTaskId)
         {
             UserTask found_userTask = Context.UserTasks.FirstOrDefault(i => i.Id == userTaskId);
@@ -54,8 +57,9 @@ namespace BangazonTaskTracker.DAL
         //update/Edit
         public UserTask UpdateUserTaskById(int id, UserTask userTask)
         {
-            Context.Entry.Update(id, userTask);
-                return userTask;
+            Repo.ListOfTasks.Update(id, userTask);
+            return userTask;
+            Context.SaveChanges();
         }
 
 
