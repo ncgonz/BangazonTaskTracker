@@ -44,15 +44,7 @@ namespace BangazonTaskTracker.DAL
         public UserTask GetUserTaskById(int userTaskId)
         {
             UserTask found_userTask = Context.UserTasks.FirstOrDefault(i => i.Id == userTaskId);
-            if (found_userTask != null)
-            {
-                return found_userTask;
-            }
-            else
-            {
-                return null;
-            }
-
+            return found_userTask;    
         }
         //update/Edit
         public void UpdateUserTaskById(int id, UserTask value)
@@ -60,8 +52,6 @@ namespace BangazonTaskTracker.DAL
             Context.Entry(value).State = System.Data.Entity.EntityState.Modified;
             Context.SaveChanges();
         }
-
-
         //get all UserTasks
         public List<UserTask> Get()
         {

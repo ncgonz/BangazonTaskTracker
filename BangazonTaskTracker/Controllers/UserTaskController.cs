@@ -17,41 +17,81 @@ namespace BangazonTaskTracker.Controllers
         
 
         // GET api/<controller>
-        public List<UserTask> Get()
+        public HttpResponseMessage Get()
         {
             var currentUser = User.Identity.Name;
-            //need this for list of tasks for speci users
-            var currentUserActivities = Repo.Get();
-            return currentUserActivities;
+            //need this for list of tasks for specific users
+            var currentUserTasks = Repo.Get();
+
+            if (!currentUserTasks.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+
+            }else
+            {
+                return Request.CreateResponse(currentUserTasks);
+            }
         }
 
         // GET api/<controller>/5
-        public UserTask Get(int userTaskId)
+        public HttpResponseMessage Get(int userTaskId)
         {
-            return Repo.GetUserTaskById(userTaskId);
+            var specificTask = Repo.GetUserTaskById(userTaskId);
+            if (specificTask == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            else
+            {               
+                return Request.CreateResponse(specificTask);
+            }
         }
 
         // POST api/<controller>
-        public void Post(UserTask userTask)
+        public HttpResponseMessage Post(UserTask userTask)
         {
-            var currentUser = User.Identity.Name;
-            userTask.Name = currentUser;
-            Repo.AddUserTask(userTask);
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            else
+            {
+                var currentUser = User.Identity.Name;
+                userTask.Name = currentUser;
+                Repo.AddUserTask(userTask);
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]UserTask value)
+        public HttpResponseMessage Put(int id, [FromBody]UserTask value)
         {
-            var foundUserTaskForUpdate = Repo.GetUserTaskById(id);
-            Repo.UpdateUserTaskById(id, value);
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            else
+            {
+                var foundUserTaskForUpdate = Repo.GetUserTaskById(id);
+                Repo.UpdateUserTaskById(id, value);
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
         }
 
         // DELETE api/<controller>/5
         [HttpDelete]
-        public void Delete(UserTask _userTask)
+        public HttpResponseMessage Delete(UserTask _userTask)
         {
-            Context.UserTasks.Remove(_userTask);
-            Context.SaveChanges();
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            else
+            {
+                Context.UserTasks.Remove(_userTask);
+                Context.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
     }
 }
