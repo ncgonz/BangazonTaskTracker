@@ -47,6 +47,8 @@ namespace BangazonTaskTracker.Tests.DAL
                     Status = 0
                 }
             };
+            ConnectToDatastore();
+        }
         
             public void ConnectToDatastore()
             {
@@ -77,7 +79,9 @@ namespace BangazonTaskTracker.Tests.DAL
         public void EnsureCanAddUserTaskById()
         {
             //Arrange
-            repo.AddUserTaskById(userTaskId);
+            UserTask _userTask = new UserTask();
+
+            repo.ListOfTasks.Add(_userTask);
             //Act
             var _count = repo.ListOfTasks.Count();
             var expectedCount = 3;
@@ -91,9 +95,11 @@ namespace BangazonTaskTracker.Tests.DAL
             //Arrange
             UserTask _userTask = new UserTask();
             //Act
-            
+            repo.RemoveUserTask(_userTask);
+            var expectedCount = 2;
+            var _count = repo.ListOfTasks.Count();
             //Assert
-
+            Assert.Equals(_count, 2);
         }
     }
 }
