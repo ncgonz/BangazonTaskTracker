@@ -47,30 +47,23 @@ namespace BangazonTaskTracker.Tests.DAL
                     Status = 0
                 }
             };
+        
             public void ConnectToDatastore()
             {
-                var query_tasks = _listTasks.AsQueryable();
+            var query_tasks = _listTasks.AsQueryable();
 
-                mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Provider);
-                mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Expression);
-                mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.ElementType);
-                mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.GetEnumerator()).Returns(() => query_tasks.GetEnumerator());
+            mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Provider);
+            mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Expression).Returns(query_tasks.Expression);
+            mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.ElementType).Returns(query_tasks.ElementType);
+            mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.GetEnumerator()).Returns(() => query_tasks.GetEnumerator());
 
-                mock_context.Setup(c => c.UserTasks).Returns(mock_tasks.Object);
-                mock_tasks.Setup(u => u.Add(It.IsAny<UserTask>())).Callback((UserTask t) => mock_tasks.Add(t));
+            mock_context.Setup(c => c.UserTasks).Returns(mock_tasks.Object);
+            mock_tasks.Setup(u => u.Add(It.IsAny<UserTask>())).Callback((UserTask t) => _listTasks.Add(t));
 
 
-            }
-        [TestMethod]
-        public void EnsureCanAddUserTaskById()
-        {
-            repo.AddUserTaskById(userTaskId);
-            //Act
-            var _count = repo.ListOfTasks.Count();
-            var expectedCount = 3;
-            //Assert
-            Assert.Equals(_count, 3);
+            
         }
+
         [TestMethod]
         public void EnsureICanCreateInstanceOfUserTask()
         {
@@ -78,6 +71,29 @@ namespace BangazonTaskTracker.Tests.DAL
             UserTask _task = new UserTask();
             //Assert
             Assert.IsNotNull(_task);
+        }
+
+        [TestMethod]
+        public void EnsureCanAddUserTaskById()
+        {
+            //Arrange
+            repo.AddUserTaskById(userTaskId);
+            //Act
+            var _count = repo.ListOfTasks.Count();
+            var expectedCount = 3;
+            //Assert
+            Assert.Equals(_count, 3);
+        }
+        
+        [TestMethod]
+        public void EnsureCanRemoveUserTask()
+        {
+            //Arrange
+            UserTask _userTask = new UserTask();
+            //Act
+            
+            //Assert
+
         }
     }
 }

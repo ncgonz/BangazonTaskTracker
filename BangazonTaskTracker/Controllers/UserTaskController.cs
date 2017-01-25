@@ -21,7 +21,7 @@ namespace BangazonTaskTracker.Controllers
         {
             var currentUser = User.Identity.Name;
             //need this for list of tasks for specific users
-            var currentUserTasks = Repo.Get();
+            var currentUserTasks = Repo.ListOfTasks.ToList();
 
             if (!currentUserTasks.Any())
             {

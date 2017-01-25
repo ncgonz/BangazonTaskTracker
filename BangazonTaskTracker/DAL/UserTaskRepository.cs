@@ -49,13 +49,23 @@ namespace BangazonTaskTracker.DAL
         //update/Edit
         public void UpdateUserTaskById(int id, UserTask value)
         {
-            Context.Entry(value).State = System.Data.Entity.EntityState.Modified;
-            Context.SaveChanges();
+            if (value.Status == TaskStatus.Complete && !value.CompletedOn.HasValue)
+            {
+                value.CompletedOn = DateTime.Now;
+
+            }
+            else
+            {
+                Context.Entry(value).State = System.Data.Entity.EntityState.Modified;
+                Context.SaveChanges();
+            }
         }
+      
         //get all UserTasks
-        public List<UserTask> Get()
+        public List<UserTask> Get(TaskStatus _taskStatus)
         {
-            return ListOfTasks;
+            return ListOfTasks.Where(t => t.Status == _taskStatus).ToList();
         }
+        
     }
 }
