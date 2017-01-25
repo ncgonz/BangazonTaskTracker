@@ -50,8 +50,8 @@ namespace BangazonTaskTracker.Tests.DAL
             ConnectToDatastore();
         }
         
-            public void ConnectToDatastore()
-            {
+        public void ConnectToDatastore()
+        {
             var query_tasks = _listTasks.AsQueryable();
 
             mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.Provider).Returns(query_tasks.Provider);
@@ -60,10 +60,7 @@ namespace BangazonTaskTracker.Tests.DAL
             mock_tasks.As<IQueryable<UserTask>>().Setup(m => m.GetEnumerator()).Returns(() => query_tasks.GetEnumerator());
 
             mock_context.Setup(c => c.UserTasks).Returns(mock_tasks.Object);
-            mock_tasks.Setup(u => u.Add(It.IsAny<UserTask>())).Callback((UserTask t) => _listTasks.Add(t));
-
-
-            
+            mock_tasks.Setup(u => u.Add(It.IsAny<UserTask>())).Callback((UserTask t) => _listTasks.Add(t));           
         }
 
         [TestMethod]
@@ -86,7 +83,7 @@ namespace BangazonTaskTracker.Tests.DAL
             var _count = repo.ListOfTasks.Count();
             var expectedCount = 3;
             //Assert
-            Assert.Equals(_count, 3);
+            Assert.Equals(_count, expectedCount);
         }
         
         [TestMethod]
@@ -99,7 +96,18 @@ namespace BangazonTaskTracker.Tests.DAL
             var expectedCount = 2;
             var _count = repo.ListOfTasks.Count();
             //Assert
-            Assert.Equals(_count, 2);
+            Assert.Equals(_count, expectedCount);
         }
+        [TestMethod]
+        public void EnsureCanUpdateUserTaskById()
+        {
+            //Arrange
+            UserTask _userTask = new UserTask();
+            TaskStatus _status = new TaskStatus();
+            //Act
+            
+            //Assert
+
+    }
     }
 }
