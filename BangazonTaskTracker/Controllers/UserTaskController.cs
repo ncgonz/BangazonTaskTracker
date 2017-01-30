@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace BangazonTaskTracker.Controllers
 {
+    [Route ("Task")]
     public class UserTaskController : ApiController
     {
         UserTaskRepository Repo = new UserTaskRepository();
@@ -20,11 +21,11 @@ namespace BangazonTaskTracker.Controllers
         list of all tasks, taking no arguments, and return 
         an error if there are no tasks in the database.
         */
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(TaskStatus taskStatus)
         {
             var currentUser = User.Identity.Name;
             //need this for list of tasks for specific users
-            var currentUserTasks = Repo.ListOfTasks.ToList();
+            var currentUserTasks = Repo.Get(taskStatus);
 
             if (!currentUserTasks.Any())
             {
@@ -95,15 +96,22 @@ namespace BangazonTaskTracker.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(UserTask _userTask)
         {
-            if (!ModelState.IsValid)
+            if (_userTask == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-            else
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nothing to delete");
+
+            } else
             {
-                Context.UserTasks.Remove(_userTask);
-                Context.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    Context.UserTasks.Remove(_userTask);
+                    Context.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
             }
         }
     }

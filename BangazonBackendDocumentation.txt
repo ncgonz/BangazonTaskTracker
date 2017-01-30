@@ -1,0 +1,47 @@
+BANGAZON TASKTRACKER TaskTracker project:
+
+This project backend was built in VisualStudio 2015,
+ASP.NET MVC WEB API, with EntityFramework, Moq, utilizing 
+the Respository Pattern.
+
+All methods begin within the Data Abstraction Layer, (DAL). 
+The DAL holds two files:  
+  
+  UserTaskContext.cs holds the DbSet<UserTask> which
+  is the entry point of the application.  
+  
+  UserTaskRespository holds all methods that are used 
+  in the application.
+  
+The TaskTrackerController is the controller which calls
+the methods that are defined within the DAL>UserTaskRepository.
+This controller is the one which contains all http requests
+to the database.
+
+There is one table: UserTask.cs and its properties are:
+  
+  public int Id { get; set; }
+  public string Name { get; set; }
+  public string Description { get; set; }
+  public TaskStatus Status { get; set; }
+  public DateTime? CompletedOn { get; set; }
+  
+  public enum TaskStatus
+    {
+        ToDo,
+        InProgress,
+        Complete
+    }
+
+To create a frontend, the developer needs to code http requests
+to the UserTaskController.
+
+------------------------------------
+
+BANGAZON TASKTRACKER  TaskTrackerTests:
+This project holds all testing of the backend.
+There is a RepositoryTest file that holds 
+method testing.
+
+
+

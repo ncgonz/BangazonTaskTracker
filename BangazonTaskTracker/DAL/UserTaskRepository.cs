@@ -9,9 +9,6 @@ namespace BangazonTaskTracker.DAL
 {
     public class UserTaskRepository
     {
-        //instantiate the repository
-        UserTaskRepository Repo = new UserTaskRepository();
-
         //making these available in the repo
         UserTaskContext Context { get; set; }
         public List<UserTask> ListOfTasks { get; private set; }
