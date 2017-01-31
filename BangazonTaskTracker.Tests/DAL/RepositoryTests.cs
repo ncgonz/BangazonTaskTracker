@@ -105,9 +105,9 @@ namespace BangazonTaskTracker.Tests.DAL
             UserTask _userTask = new UserTask();
             TaskStatus _status = new TaskStatus();
             //Act
-            
+            //repo.UpdateUserTaskById(_userTask.id, _status.value);
             //Assert
-
+            Assert.AreNotEqual(_userTask, null);
     }
     }
 }

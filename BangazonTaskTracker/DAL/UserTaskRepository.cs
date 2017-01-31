@@ -60,11 +60,15 @@ namespace BangazonTaskTracker.DAL
             }
         }
 
-        //get all UserTasks This method returns a list of tasks to the database with the argument _taskStatus.
+        /*get all UserTasks This method returns a list of tasks to 
+          the database with the argument _taskStatus.*/
         public List<UserTask> Get(TaskStatus _taskStatus)
         {
             return ListOfTasks.Where(t => t.Status == _taskStatus).ToList();
         }
-        
+        public List<UserTask> Get()
+        {
+            return Context.UserTasks.ToList();
+        }
     }
 }
