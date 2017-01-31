@@ -15,25 +15,21 @@ namespace BangazonTaskTracker.Controllers
         UserTaskRepository Repo = new UserTaskRepository();
         UserTaskContext Context { get; set; }
 
-
-
         /* GET api/<controller>  This Get() will return a 
         list of all tasks, taking no arguments, and return 
         an error if there are no tasks in the database.
         */
-        public HttpResponseMessage Get(TaskStatus taskStatus)
+        public HttpResponseMessage Get()
         {
-            var currentUser = User.Identity.Name;
-            //need this for list of tasks for specific users
-            var currentUserTasks = Repo.Get(taskStatus);
+            var listy = Repo.ListOfTasks;
 
-            if (!currentUserTasks.Any())
+            if (listy != null)
             {
-                return Request.CreateResponse(HttpStatusCode.NoContent);
-
-            }else
+               return Request.CreateResponse(listy);
+            }
+            else
             {
-                return Request.CreateResponse(currentUserTasks);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
         }
 
