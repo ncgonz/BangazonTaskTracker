@@ -48,6 +48,7 @@ namespace BangazonTaskTracker.DAL
         //update/Edit This method updates a user task to the database with the arguments id and value.
         public void UpdateUserTaskById(int id, UserTask value)
         {
+            value.Id = id;
             if (value.Status == TaskStatus.Complete && !value.CompletedOn.HasValue)
             {
                 value.CompletedOn = DateTime.Now;

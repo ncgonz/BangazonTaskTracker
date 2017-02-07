@@ -77,8 +77,8 @@ namespace BangazonTaskTracker.Tests.DAL
         {
             //Arrange
             UserTask _userTask = new UserTask();
-
-            repo.ListOfTasks.Add(_userTask);
+            repo.UserTasks.Add(userTaskId);     
+            //repo.ListOfTasks.Add(_userTask);
             //Act
             var _count = repo.ListOfTasks.Count();
             var expectedCount = 3;
@@ -108,6 +108,6 @@ namespace BangazonTaskTracker.Tests.DAL
             //repo.UpdateUserTaskById(_userTask.id, _status.value);
             //Assert
             Assert.AreNotEqual(_userTask, null);
-    }
+        }
     }
 }
