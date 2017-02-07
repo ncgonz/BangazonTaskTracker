@@ -61,9 +61,14 @@ namespace BangazonTaskTracker.Controllers
             }
             else
             {
-                var currentUser = User.Identity.Name;
-                userTask.Name = currentUser;
-                Repo.AddUserTask(userTask);
+                try
+                {
+                    Repo.AddUserTask(userTask);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
         }
@@ -80,7 +85,6 @@ namespace BangazonTaskTracker.Controllers
             }
             else
             {
-                var foundUserTaskForUpdate = Repo.GetUserTaskById(id);
                 Repo.UpdateUserTaskById(id, value);
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
