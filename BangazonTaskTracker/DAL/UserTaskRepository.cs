@@ -34,9 +34,10 @@ namespace BangazonTaskTracker.DAL
             Context.SaveChanges();     
         }
         //REMOVE USERTASK FROM DB This method removes a user task from the database with the argument _userTask.
-        public void RemoveUserTask(UserTask _userTask)
+        public void RemoveUserTask(int _id)
         {
-            Context.UserTasks.Remove(_userTask);
+            UserTask found_Id = Context.UserTasks.FirstOrDefault(i => i.Id == _id);
+            Context.UserTasks.Remove(found_Id);
             Context.SaveChanges();
         }
         //GET USERTASK BY USERTASKID
