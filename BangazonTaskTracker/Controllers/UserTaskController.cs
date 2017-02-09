@@ -94,9 +94,10 @@ namespace BangazonTaskTracker.Controllers
             task from the database taking argument _userTask.
         */
         [HttpDelete]
-        public HttpResponseMessage Delete(UserTask _userTask)
+        
+        public HttpResponseMessage Delete(int _id)
         {
-            if (_userTask == null)
+            if (_id == 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nothing to delete");
 
@@ -108,9 +109,8 @@ namespace BangazonTaskTracker.Controllers
                 }
                 else
                 {
-                    Context.UserTasks.Remove(_userTask);
-                    Context.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                    Repo.RemoveUserTask(_id);
+                    return Request.CreateResponse(HttpStatusCode.Found, ModelState);
                 }
             }
         }
