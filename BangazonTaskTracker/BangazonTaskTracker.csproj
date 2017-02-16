@@ -218,7 +218,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="index.html" />
-    <Content Include="Partials\forms.html" />
+    <Content Include="Partials\listOfUserTasks.html" />
     <Content Include="Partials\index.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
