@@ -9,7 +9,6 @@ using System.Web.Http;
 
 namespace BangazonTaskTracker.Controllers
 {
-    [Route ("Task")]
     public class UserTaskController : ApiController
     {
         UserTaskRepository Repo = new UserTaskRepository();

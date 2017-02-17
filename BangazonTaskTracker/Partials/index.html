@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html ng-app="Tracker">
+    <head>
+        <title>Bangazon Task Tracker!</title>
+	    <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/Content/Site.css"/>
+    </head>
+    <body ng-controller="UserTaskController">
+        <div>
+            <h1>Bangazon Task Tracker</h1>
+
+            <article>
+                <h1>{{title}}</h1>
+                <!-- this file allows the user to input a new task into each field and then submit -->
+                <form>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="name" ng-model="UserTask.Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" placeholder="month end closing" ng-model="UserTask.Description">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" class="form-control" placeholder="ToDo" ng-model="UserTask.Status">
+                    </div>
+                    <div class="form-group">
+                        <label>CompletedOn</label>
+                        <input type="text" class="form-control" placeholder="2/29/2017" ng-model="UserTask.CompletedOn">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-default" ng-click="addUserTask()">{{submitButtonText}}</button>
+                    </div>
+                </form>
+            </article>
+         </div>
+        <script type="text/javascript" src="/bundles/jquery"></script>
+        <script type="text/javascript" src="/bundles/bootstrap"></script>
+        <script type="text/javascript" src="/bundles/app"></script>
+    </body>
+</html>

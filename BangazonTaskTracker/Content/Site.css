@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+.form-group {
+    font-size: 16px;
+    text-align: right;
+    margin: 10%;
+    width: 90%;
+    color: blue;
+}
