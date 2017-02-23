@@ -52,6 +52,7 @@ namespace BangazonTaskTracker.Controllers
         /* POST api/<controller>  This Post() will post a task
              in the database taking argument userTask.
         */
+        [HttpPost]
         public HttpResponseMessage Post(UserTask userTask)
         {
             if (!ModelState.IsValid)
@@ -62,7 +63,7 @@ namespace BangazonTaskTracker.Controllers
             {
                 try
                 {
-                    Repo.AddUserTask(userTask);
+                    Repo.AddUserTaskById(userTask);
                 }
                 catch (Exception ex)
                 {
@@ -76,6 +77,7 @@ namespace BangazonTaskTracker.Controllers
          task  taking argument id and value, and return an 
          error if it is not found in the database.
         */
+        [HttpPut]
         public HttpResponseMessage Put(int id, [FromBody]UserTask value)
         {
             if (!ModelState.IsValid)
