@@ -1,10 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body ng-controller="UserTaskController">
+﻿
     <article>
         <div ng-repeat="userTask in userTasks">
             <ul>
@@ -12,12 +6,10 @@
                 <li>{{UserTask.Description}}</li>
                 <li>{{UserTask.Status}}</li>
                 <li>{{UserTask.CompletedOn}}</li>
-                <li><button ng-click="EditActivity(userTask.)" class="editButton">Edit</button><button ng-click="RemoveActivity(activity.ActivityId)" class="removeButton">Delete</button></li>
+                <li><button ng-click="UpdateUserTaskById(id, value)" class="editButton">Edit</button><button ng-click="RemoveActivity(activity.ActivityId)" class="removeButton">Delete</button></li>
             </ul>
          </div>
 
     </article>
 
 
-</body>
-</html>
