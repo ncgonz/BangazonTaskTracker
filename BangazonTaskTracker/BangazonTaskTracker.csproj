@@ -226,7 +226,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\Factory.js" />
+    <Content Include="Scripts\app\Controllers\TaskController.js" />
+    <Content Include="Scripts\app\Factories\TaskFactory.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
