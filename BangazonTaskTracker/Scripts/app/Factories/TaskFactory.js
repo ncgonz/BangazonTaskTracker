@@ -10,4 +10,13 @@ app.factory("TaskFactory", function ($q, $http) {
             reject(error);
         });
     };
+    var getTask = function () {
+        return $q(function (resolve, reject) {
+            $http.put('~/api/UserTask/: userTaskId')
+        }).success(function (userTask) {
+            resolve(userTask)
+        }, function (error) {
+            reject(error);
+        });
+    };
 });
