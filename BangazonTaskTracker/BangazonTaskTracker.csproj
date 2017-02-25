@@ -226,6 +226,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\Controllers\AddTaskController.js" />
+    <Content Include="Scripts\app\Controllers\DeleteTaskController.js" />
     <Content Include="Scripts\app\Controllers\EditTaskController.js" />
     <Content Include="Scripts\app\Controllers\TaskController.js" />
     <Content Include="Scripts\app\Factories\TaskFactory.js" />
