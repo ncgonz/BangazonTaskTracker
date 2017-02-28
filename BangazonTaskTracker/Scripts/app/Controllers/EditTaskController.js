@@ -4,7 +4,7 @@ app.controller('EditTaskController', ['$scope', '$location', '$TaskFactory', '$h
     $scope.getATask;
     $scope.getATask = function () {
         TaskFactory.getTask($scope.getATask).then(function (taskReturn) {
-            $scope.taskArray = taskReturn.dataset.data[0];
+            $scope.editedTask = taskReturn.dataset.data;
         })
     }
 }]);
