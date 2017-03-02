@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using BangazonTaskTracker.DAL;
 
 namespace BangazonTaskTracker.Models
 {
-    public class UserTask
+    public class UserTask : IDbModel
     {
         [Key]
         public int Id { get; set; }

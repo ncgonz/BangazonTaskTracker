@@ -189,6 +189,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserTaskController.cs" />
+    <Compile Include="DAL\IDbModel.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\Repository.cs" />
+    <Compile Include="DAL\TaskQuery.cs" />
     <Compile Include="DAL\UserTaskContext.cs" />
     <Compile Include="DAL\UserTaskRepository.cs" />
     <Compile Include="Global.asax.cs">

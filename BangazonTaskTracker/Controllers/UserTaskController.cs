@@ -1,7 +1,5 @@
 ﻿using BangazonTaskTracker.DAL;
 using BangazonTaskTracker.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,8 +9,8 @@ namespace BangazonTaskTracker.Controllers
 {
     public class UserTaskController : ApiController
     {
-        UserTaskRepository Repo = new UserTaskRepository();
-        UserTaskContext Context { get; set; }
+        readonly Repository _repo = new Repository();
+        readonly TaskQuery _query = new TaskQuery();
 
         /* GET api/<controller>  This Get() will return a 
         list of all tasks, taking no arguments, and return 
@@ -20,16 +18,14 @@ namespace BangazonTaskTracker.Controllers
         */
         public HttpResponseMessage Get()
         {
-            var listy = Repo.ListOfTasks;
+            var listy = _repo.Query<UserTask>().ToList();
 
-            if (listy != null)
+            if (listy.Any())
             {
                return Request.CreateResponse(listy);
             }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
+
+            return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         /* GET api/<controller>/5  This Get() will return a 
@@ -38,7 +34,7 @@ namespace BangazonTaskTracker.Controllers
         */
         public HttpResponseMessage Get(int userTaskId)
         {
-            var specificTask = Repo.GetUserTaskById(userTaskId);
+            var specificTask = _repo.GetById<UserTask>(userTaskId);
             if (specificTask == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -59,18 +55,9 @@ namespace BangazonTaskTracker.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            else
-            {
-                try
-                {
-                    Repo.AddUserTaskById(userTask);
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
+
+            _repo.Insert(userTask);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         /*PUT api/<controller>/5  This Put() will update a 
@@ -84,11 +71,9 @@ namespace BangazonTaskTracker.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            else
-            {
-                Repo.UpdateUserTaskById(id, value);
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
+
+            _query.UpdateTask(value);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         /* DELETE api/<controller>/5  This Delete() will delete a 
@@ -96,24 +81,21 @@ namespace BangazonTaskTracker.Controllers
         */
         [HttpDelete]
         
-        public HttpResponseMessage Delete(int _id)
+        public HttpResponseMessage Delete(int id)
         {
-            if (_id == 0)
+            if (id == 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nothing to delete");
 
-            } else
-            {
-                if (!ModelState.IsValid)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    Repo.RemoveUserTask(_id);
-                    return Request.CreateResponse(HttpStatusCode.Found, ModelState);
-                }
             }
+
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            _repo.Delete<UserTask>(id);
+            return Request.CreateResponse(HttpStatusCode.Found, ModelState);
         }
     }
 }
