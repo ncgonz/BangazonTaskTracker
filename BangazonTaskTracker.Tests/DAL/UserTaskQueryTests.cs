@@ -4,6 +4,7 @@ using BangazonTaskTracker.Models;
 using BangazonTaskTracker.DAL;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Moq;
 
 namespace BangazonTaskTracker.Tests.DAL
@@ -82,5 +83,36 @@ namespace BangazonTaskTracker.Tests.DAL
             //Assert
             Assert.AreEqual(completedOn, task.CompletedOn);
         }
+
+
+        [TestMethod]
+        public void RandomTestWithMoq()
+        {
+            //Arrange
+            var mockedRandomNumberGenerator = new Mock<RandomNumberGenerator>();
+            mockedRandomNumberGenerator.SetupGet(x => x.RandomNumberToAdd).Returns(2);
+            var thing = new RandomAdder(mockedRandomNumberGenerator.Object);
+
+            //Act
+            var result = thing.AddRandomly(4);
+
+            //Assert
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void RandomTestWithCustomMock()
+        {
+            //Arrange
+            var mockedRandomNumberGenerator = new MockedRandomNumberGenerator();
+            var thing = new RandomAdder(mockedRandomNumberGenerator);
+
+            //Act
+            var result = thing.AddRandomly(4);
+
+            //Assert
+            Assert.AreEqual(6, result);
+        }
+
     }
 }
